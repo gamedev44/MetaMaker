@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Metamaker</title>
+  <meta name="description" content="Metamaker by Risk – Single-Image -to- full facial reconstruction App with rigged body output for use with Unreal Engine, Unity and more.">
+  <meta name="author" content="Risk">
+  <style>
+    :root {
+      /* layout */
+      --footer-cover: 6.5vh;
+      --mask-height: 6vh;
+      --iframe-offset: 1vh;
+      --mask-gap: 15vw;
+      --btn-size: 2.5rem;
+
+      /* loading */
+      --loading-visible-seconds: 5s;   /* how long loading stays visible */
+      --fade-out-duration: 3s;        /* fade‑out time */
+      --loading-box-bg: #222;
+      --loading-box-size: 50vw;
+      --loading-logo-size: 20vw;       /* logo size in loading screen */
+      --motto-text: "MetaHumans Made Easy By :Risk";
+    }
+
+    html, body {
+      margin: 0; padding: 0;
+      height: 100%; overflow: hidden;
+      font-family: Arial, sans-serif;
+      touch-action: manipulation;
+    }
+
+    /* loading backdrop */
+    .loading-backdrop {
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,0.8);
+      display: flex; align-items: center; justify-content: center;
+      z-index: 30;
+      animation: fadeOut var(--fade-out-duration) ease-in-out var(--loading-visible-seconds) forwards;
+    }
+    .loading-box {
+      background: var(--loading-box-bg);
+      width: var(--loading-box-size);
+      height: var(--loading-box-size);
+      border-radius: 12px;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      position: relative;
+      color: #fff;
+      padding: 1rem;
+      box-sizing: border-box;
+    }
+    .loading-box .loading-logo {
+      width: var(--loading-logo-size);
+      height: auto;
+      margin-bottom: 1rem;
+    }
+    .loading-box .title {
+      font-size: 1.5rem; margin-bottom: 1rem;
+    }
+    .loading-box .loader {
+      width: 1rem; height: 1rem;
+      background: #fff; border-radius: 50%;
+      animation: pulse calc(var(--loading-visible-seconds) * 1) ease-in-out infinite alternate;
+    }
+    .loading-box .motto {
+      position: absolute; bottom: 10%;
+      font-size: 1rem;
+    }
+
+    @keyframes pulse {
+      from { transform: scale(1); }
+      to   { transform: scale(1.5); }
+    }
+    @keyframes fadeOut {
+      to { opacity: 0; visibility: hidden; }
+    }
+
+    /* navbar background */
+    .top-mask {
+      position: absolute; top: 0; left: 0;
+      width: calc(100% - var(--mask-gap));
+      height: var(--mask-height);
+      background: var(--loading-box-bg);
+      z-index: 10; pointer-events: none;
+    }
+    /* site logo */
+    .logo {
+      position: absolute;
+      top: calc((var(--mask-height) - var(--btn-size)) / 2);
+      left: 1rem;
+      height: var(--btn-size);
+      z-index: 11;
+    }
+    /* help/info button */
+    .help-btn {
+      position: absolute;
+      top: calc((var(--mask-height) - var(--btn-size)) / 2);
+      left: calc(65% - var(--mask-gap) - (var(--btn-size) / 2));
+      display: flex; align-items: center; gap: 0.4rem;
+      background: var(--loading-box-bg);
+      color: #fff; border: none;
+      padding: 0.2rem 0.6rem; border-radius: var(--btn-size);
+      font-size: 1rem; cursor: pointer;
+      z-index: 11;
+    }
+    .help-btn .info-icon {
+      display: inline-block;
+      width: var(--btn-size); height: var(--btn-size);
+      line-height: var(--btn-size);
+      text-align: center; border: 1px solid #fff;
+      border-radius: 50%; font-weight: bold; font-size: 1.2rem;
+    }
+
+    /* hide content until after loading */
+    .content {
+      position: absolute; top: 0;
+      bottom: var(--footer-cover);
+      left: 0; right: 0; overflow: hidden;
+      opacity: 0;
+    }
+    .iframe-container {
+      position: relative; width: 100%; height: 100%;
+    }
+    .iframe-container iframe {
+      position: absolute;
+      top: calc(-1 * var(--iframe-offset));
+      left: 0;
+      width: 100%;
+      height: calc(100% + var(--footer-cover) + var(--iframe-offset));
+      border: none;
+    }
+
+    .footer {
+      position: absolute; bottom: 0; left: 0;
+      width: 100%; height: var(--footer-cover);
+      background: var(--loading-box-bg);
+      color: #fff; display: flex; align-items: center; justify-content: center;
+      font-size: 0.9rem; box-sizing: border-box; z-index: 10;
+    }
+
+    /* how-to modal */
+    .modal-backdrop {
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,0.6);
+      display: none; align-items: center; justify-content: center;
+      z-index: 20;
+    }
+    .modal {
+      background: #fff; padding: 1.5rem; border-radius: 8px;
+      max-width: 400px; width: 90%; box-sizing: border-box; text-align: left;
+    }
+    .modal h2 { margin: 0 0 0.5rem; font-size: 1.2rem; }
+    .modal p { margin: 0.5rem 0; line-height: 1.4; }
+    .modal button {
+      margin-top: 1rem; padding: 0.5rem 1rem;
+      border: none; background: var(--loading-box-bg);
+      color: #fff; cursor: pointer; border-radius: 4px;
+    }
+
+    @media (max-width: 600px) {
+      :root {
+        --mask-gap: 25vw;
+        --btn-size: 2rem;
+        --loading-box-size: 50vw;
+        --loading-logo-size: 30vw;
+      }
+      .modal { padding: 1rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="loading-backdrop" id="loadingBackdrop">
+    <div class="loading-box">
+      <img src="https://i.ibb.co/8LdnT9FG/image-2025-04-21-080716708.png" alt="Metamaker Logo" class="loading-logo">
+      <div class="title">Meta-Maker</div>
+      <div class="loader"></div>
+      <div class="motto" id="motto"></div>
+    </div>
+  </div>
+
+  <div class="top-mask"></div>
+  <img src="https://i.ibb.co/8LdnT9FG/image-2025-04-21-080716708.png" alt="Metamaker Logo" class="logo">
+  <button class="help-btn" id="helpBtn">
+    <span class="info-icon">i</span>
+    INFO
+  </button>
+
+  <div class="content" id="mainContent">
+    <div class="iframe-container">
+      <iframe src="https://metaperson.avatarsdk.com"></iframe>
+    </div>
+  </div>
+
+  <div class="footer">
+    Powered by PGD ©
+  </div>
+
+  <div class="modal-backdrop" id="modalBackdrop">
+    <div class="modal">
+      <h2>How to use Metamaker</h2>
+      <p>Use the sliders and dropdowns on the right side of the page to tweak facial features and model settings.</p>
+      <p>When you’re ready, click the share icon at the top, enter your email, and download the rigged model.</p>
+      <button id="closeModal">Close</button>
+    </div>
+  </div>
+
+  <script>
+    // inject motto text
+    document.getElementById('motto').textContent =
+      getComputedStyle(document.documentElement)
+        .getPropertyValue('--motto-text').replace(/(^"|"$)/g, '');
+
+    // after loadingBackdrop fade-out, fade-in content
+    window.addEventListener('DOMContentLoaded', () => {
+      const visible = parseFloat(getComputedStyle(document.documentElement)
+        .getPropertyValue('--loading-visible-seconds')) * 1000;
+      const fadeOut = parseFloat(getComputedStyle(document.documentElement)
+        .getPropertyValue('--fade-out-duration')) * 1000;
+      const total = visible + fadeOut;
+      setTimeout(() => {
+        document.getElementById('loadingBackdrop').style.display = 'none';
+        const content = document.getElementById('mainContent');
+        content.style.transition = `opacity var(--fade-out-duration) ease-in-out`;
+        content.style.opacity = '1';
+      }, total);
+    });
+
+    // help modal
+    document.getElementById('helpBtn').addEventListener('click', () => {
+      document.getElementById('modalBackdrop').style.display = 'flex';
+    });
+    document.getElementById('closeModal').addEventListener('click', () => {
+      document.getElementById('modalBackdrop').style.display = 'none';
+    });
+  </script>
+</body>
+</html>
