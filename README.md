@@ -1,6 +1,6 @@
 # MetaMaker
 
-Metamaker by Risk – Single‑Image→full facial reconstruction App built on **Face Next V2 mod by Risk** and utilizing the **Avatar SDK pipeline** as core tech. Features robust rigged body export for Unreal Engine (including MetaHuman by Epic Games), Unity, Godot, and many other platforms.
+Metamaker by Risk – Single‑Image → Full‑Face Reconstruction App powered by **Face Next V2 mod by Risk** and the **Avatar SDK pipeline**. Provides robust rigged body export for Unreal Engine (including MetaHuman by Epic Games), Unity, Godot, and other platforms.
 
 ---
 
@@ -8,24 +8,25 @@ Metamaker by Risk – Single‑Image→full facial reconstruction App built on *
 
 1. [Features](#features)  
 2. [Demo](#demo)  
-3. [Roadmap](#roadmap) 
+3. [Roadmap](#roadmap)  
+4. [Note](#note)
 
 ---
 
 ## Features
 
-- **Core Technology** – built on Face Next V2 mod by Risk  
-- **Avatar SDK Pipeline** – end‑to‑end avatar creation & export flow  
-- **Single‑Image Upload** – take a selfie or browse for a photo  
-- **Real‑Time Reconstruction** – in‑browser preview, 1:1 model fidelity  
-- **Rigged Body Export** – FBX/GLTF ready for Unreal Engine (incl. MetaHuman by Epic Games), Unity, Godot, etc.  
-- **Configurable UI** – sliders & dropdowns for facial feature tweaks  
-- **Share & Download** – enter email, receive download link  
-- **Lightweight Embed** – iframe wrapper with customizable navbar/footer  
-- **Extensible** – open‑source core, plugin hooks for custom post‑processing  
-- **Morph Targets** – multiple preset morph targets for body shape (weight, height, proportions)  
-- **AsterStrand Hair Library** – premade hair presets available in sidebar if generated base hair isn’t suitable  
-- **Clothing & Accessories** – supports various clothing types and basic character features, ported from Epic’s Mutable plugin
+- **Core Technology** – Built on Face Next V2 mod by Risk  
+- **Avatar SDK Pipeline** – End‑to‑end avatar creation and export flow  
+- **Single‑Image Upload** – Take a selfie or browse for a photo  
+- **Real‑Time Reconstruction** – In‑browser preview at 1:1 model fidelity  
+- **Rigged Body Export** – FBX/GLTF ready for Unreal Engine (MetaHuman by Epic Games), Unity, Godot, etc.  
+- **Configurable UI** – Sliders and dropdowns for facial feature adjustments  
+- **Share & Download** – Enter email to receive download link  
+- **Lightweight Embed** – Iframe wrapper with customizable navbar and footer  
+- **Extensible** – Plugin hooks for custom post‑processing  
+- **Morph Targets** – Preset body‑shape targets (weight, height, proportions)  
+- **AsterStrand Hair Library** – Sidebar of premade hair presets if generated base hair isn’t suitable  
+- **Clothing & Accessories** – Support for various clothing types and character features, adapted from Epic’s Mutable plugin
 
 ---
 
@@ -38,10 +39,13 @@ Metamaker by Risk – Single‑Image→full facial reconstruction App built on *
 
 ## Roadmap
 
-- [ ] Batch upload & reconstruction  
+- [ ] Batch upload and reconstruction  
 - [ ] Custom avatar poses  
 - [ ] Direct Unity/Unreal SDK integration  
-- [ ] Mobile‑optimized UI  
+- [ ] Mobile‑optimized UI
 
 ---
-## Note: this tool will not be receiving any updates very soon but rest asured we will get to them.
+
+## Note
+
+This tool will not receive updates soon, but rest assured we will address them when possible.
