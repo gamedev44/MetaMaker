@@ -32,8 +32,8 @@ Metamaker by Risk – Single‑Image → Full‑Face Reconstruction App powered 
 
 ## Demo
 
-> **Live Preview:**  
-> https://gamedev44.github.io/MetaMaker/
+[![Live Preview](https://img.shields.io/badge/Preview-Open_in_Browser-blue.svg)](https://gamedev44.github.io/MetaMaker/)
+
 
 ---
 
